@@ -1,0 +1,847 @@
+
+<div class="categories" ng-if="categoiesFlag">
+
+    <div class="wrapper">
+
+        <header class="header">
+            <div class="logo">
+                <img src="{{imageBasePath}}/images/staticImage/logo1.png" alt="">
+            </div>
+            <h1 class="ribbon">
+                <strong class="ribbon-content"><marquee behavior="scroll" scrollamount="10"><span>Welcome to <span>Tehzeeb Bakers</span></span></marquee></strong>
+            </h1>
+        </header>
+        <section class="body">
+            <div class="inner_container">
+                <div class="custom_order">
+                    <div>
+                        <span class="custom_message_block"></span>
+                    </div>
+                </div>
+                <div class="main_categories">
+                    <ul>
+                        <li ng-repeat="category in categories track by $index">
+                            <a href="" ng-click="categoryName('categories', category.id, category.name)"  data-id="{{category.id}}">
+                                <div ng-if="category.image">
+                                    <img style="width: 220px; height: 250px; margin-top: -114px" src="{{imageBasePath}}/images/usersImages/category/{{category.image}}" alt="">
+                                </div>
+                                {{ category.name }}
+                            </a>
+                        </li>
+                        <li class="custom_order">
+                            <a href="" ng-click="categoryName('customOrder')">Custom Order</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--<div class="custom-order-btn">-->
+                <!--<a href="" ng-click="categoryName('customOrder')">Custom Order</a>-->
+                <!--</div>-->
+            </div>
+        </section>
+    </div>
+    <footer class="footer">
+        <span>Cake software version 1.0.0</span>
+    </footer>
+</div>
+<div class="sub-categories" ng-if="sub_categoiesFlag">
+    <div class="wrapper">
+        <header class="header">
+            <nav>
+                <ul>
+                    <li ng-repeat="breadcrumb in breadcrumbs">
+                        <span ng-if="$last">
+                            <p>{{breadcrumb.name}}</p>
+                        </span>
+                        <span ng-if="! $last">
+                            <a href="" ng-click="categoryName(breadcrumb.module, breadcrumb.id, breadcrumb.name)">{{breadcrumb.name}}</a> {{breadcrumb.separator}}
+                        </span>
+                    </li>
+                </ul>
+                <p class="breadcrumbs_category_item">»  {{breadcrumbs_module_item[0].category}} </p>
+            </nav>
+            <div class="logo">
+                <img src="{{imageBasePath}}/images/staticImage/logo1.png" alt="">
+            </div>
+        </header>
+        <span class="custom_message_block" style="display: none; float: right"></span>
+        <section class="body">
+            <div class="inner_container">
+                <div class="sub_categories">
+                    <ul>
+                        <li  ng-repeat="sub_category in subcategories">
+                            <a href="" ng-click="categoryName('categories', sub_category.id, sub_category.name)"  data-id="{{sub_category.id}}"  ng-if="sub_category.image">
+
+                                <img src='{{imageBasePath}}/images/usersImages/category/{{sub_category.image}}'  alt="">
+                                {{ sub_category.name }}
+                            </a>
+                            <a href="" ng-click="categoryName('categories', sub_category.id, sub_category.name)"  data-id="{{sub_category.id}}"  ng-if="!sub_category.image">
+
+                                <img src='{{imageBasePath}}/images/usersImages/category/cake-icon-85849.png'  alt="">
+                                {{ sub_category.name }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </section>
+    </div><br>
+    <!--<footer class="footer" class="navbar-fixed-bottom">-->
+    <!--<span>Cake software version 1.1.0.</span>-->
+    <!--</footer>-->
+
+    <!--<div class="outer">-->
+    <!--<footer class="footer"> <span>Cake software version 1.1.0.</span> </footer>-->
+    <!--</div>-->
+    <nav class="navbar navbar-default navbar-bottom sub-cat-sticky-footer" role="navigation">
+        <div class="container">
+            <span>Cake software version 1.0.0</span>
+        </div>
+    </nav>
+</div>
+<div class="product-section"  ng-if="productFlag">
+    <div class="wrapper">
+        <header class="header">
+            <nav class="inner_nav">
+                <ul class="breadcrumb-contents">
+                    <li ng-repeat="breadcrumb in breadcrumbs">
+                        <span ng-if="$last">
+                            <p>{{breadcrumb.name}} </p>
+                        </span>
+                        <span ng-if="! $last">
+                            <a href="" ng-click="categoryName(breadcrumb.module, breadcrumb.id, breadcrumb.name)">{{breadcrumb.name}}</a>{{breadcrumb.separator}}
+                        </span>
+                    </li>
+                    <p class="breadcrumbs_product_item">» {{breadcrumbs_module_item[1].product}}</p>
+                </ul>
+            </nav>
+            <div class="logo"> <a href=""><img src="{{imageBasePath}}/images/staticImage/logo1.png" alt=""></a> </div>
+            <div class="search_container">
+                <form action="" method="get">
+                    <div class="search_block">
+                        <input name="" type="text" class="text_field" ng-model="$ctrl.query" placeholder="Search products here ...">
+                        <input name="" type="button" class="btn">
+                    </div>
+                </form>
+            </div>
+        </header>
+        <section class="body">
+            <div class="inner_container">
+                <div class="toolbar">
+                    <a href="" ng-click="categoryName('productGridView', product.id, product.name)">
+                        <img src="{{imageBasePath}}/images/staticImage/grid_view_icon.png" alt="">
+                    </a>
+                    <a href="" class="singleViewIcon" ng-click="categoryName('productSingleView', product.id, product.name)">
+                        <img src="{{imageBasePath}}/images/staticImage/single_view_icon.png" alt="">
+                    </a>
+                </div>
+                <div class="grid_view">
+                    <!--<div class="custom_order">-->
+                    <!--<a href="" ng-click="categoryName('customOrder')">Custom Order</a>-->
+                    <!--</div>-->
+                    <ul>
+                        <li ng-repeat="product in category_products | filter:$ctrl.query ">
+                            <div class="product">
+                                <a href="" ng-click="categoryName('productPreviewSection', product.id, product.name, $index)"  data-id="{{product.id}}">
+                                    <div class="product_thumbnail" ng-if="product.image">
+                                        <img src='{{imageBasePath}}/images/usersImages/product/{{product.image}}' alt="">
+                                    </div>
+                                    <div class="product_thumbnail" ng-if=" !product.image">
+                                        <img src='{{imageBasePath}}/images/usersImages/product/images.png' alt="">
+                                    </div>
+                                </a>
+                                <div class="product_detail">
+                                    <a href="" ng-click="categoryName('productPreviewSection', product.id, product.name, $index)"  data-id="{{product.id}}">
+                                        <h3>{{ product.name }}</h3>
+                                    </a>
+                                    <div class="btn">
+                                        <a href="" ng-click="categoryName('product', product.id, product.name)"  data-id="{{product.id}}">Order</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div><br>
+    <!--<div class="outer">-->
+    <footer class="footer inner_footer">
+        <span>Cake software version 1.0.0</span>
+    </footer>
+    <!--</div>-->
+</div>
+<div class="product-section"  ng-if="productGridViewFlag">
+    <div class="wrapper">
+        <header class="header">
+            <nav class="inner_nav">
+                <ul class="breadcrumb-contents">
+                    <li ng-repeat="breadcrumb in breadcrumbs">
+                        <span ng-if="$last">
+                            <p>{{breadcrumb.name}} </p>
+                        </span>
+                        <span ng-if="! $last">
+                            <a href="" ng-click="categoryName(breadcrumb.module, breadcrumb.id, breadcrumb.name)">{{breadcrumb.name}} </a> {{breadcrumb.separator}}
+                        </span>
+                    </li>
+                </ul>
+            </nav>
+            <div class="logo"> <a href=""><img src="{{imageBasePath}}/images/staticImage/logo.png" alt=""></a> </div>
+            <div class="search_container">
+                <form action="" method="get">
+                    <div class="search_block">
+                        <input name="" type="text" class="text_field" ng-model="$ctrl2.query" placeholder="Search products here ...">
+                        <input name="" type="button" class="btn">
+                    </div>
+                </form>
+            </div>
+        </header>
+        <section class="body">
+            <div class="inner_container">
+                <div class="toolbar">
+                    <a href="" ng-click="categoryName('productGridView', product.id, product.name)">
+                        <img src="{{imageBasePath}}/images/staticImage/grid_view_icon.png" alt="">
+                    </a>
+                    <a href="" class="singleViewIcon" ng-click="categoryName('productSingleView', product.id, product.name)">
+                        <img src="{{imageBasePath}}/images/staticImage/single_view_icon.png" alt="">
+                    </a>
+                </div>
+                <div class="grid_view">
+                    <!--<div class="custom_order">-->
+                    <!--<a href="" ng-click="categoryName('customOrder')">Custom Order</a>-->
+                    <!--</div>-->
+                    <ul>
+                        <li ng-repeat="product in category_products | filter:$ctrl2.query ">
+                            <div class="product">
+                                <a href="" ng-click="categoryName('productPreviewSection', product.id, product.name, $index)"  data-id="{{product.id}}">
+                                    <div class="product_thumbnail">
+                                        <img src='{{imageBasePath}}/images/usersImages/product/{{product.image}}' ng-if="product.image" alt="">
+                                        <img src="{{imageBasePath}}/images/usersImages/product/images.png" ng-if="!product.image">
+                                    </div>
+                                </a>
+                                <div class="product_detail">
+                                    <a href="" ng-click="categoryName('productPreviewSection', product.id, product.name, $index)"  data-id="{{product.id}}">
+                                        <h3>{{ product.name }}</h3>
+                                    </a>
+                                    <div class="btn">
+                                        <a href="" ng-click="categoryName('product', product.id, product.name)"  data-id="{{product.id}}">Order</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div><br>
+    <footer class="footer inner_footer">
+        <span>Cake software version 1.0.0</span>
+    </footer>
+</div>
+<div class="product-section" ng-if="productSingleViewFlag">
+    <div class="wrapper">
+        <header class="header">
+            <nav class="inner_nav">
+                <ul class="breadcrumb-contents">
+                    <li ng-repeat="breadcrumb in breadcrumbs">
+                        <span ng-if="$last">
+                            <p>{{breadcrumb.name}} </p>
+                        </span>
+                        <span ng-if="! $last || breadcrumb.separator != '»'">
+                            <a href="" ng-click="categoryName(breadcrumb.module, breadcrumb.id, breadcrumb.name)">{{breadcrumb.name}} </a> {{breadcrumb.separator}}
+                        </span>
+                    </li>
+                </ul>
+            </nav>
+            <div class="logo"> <a href=""><img src="{{imageBasePath}}/images/staticImage/logo.png" alt=""></a> </div>
+            <div class="search_container">
+                <form action="" method="get">
+                    <div class="search_block">
+                        <input name="" type="text" class="text_field" ng-model="$ctrl12.query" placeholder="Search products here ...">
+                        <input name="" type="button" class="btn">
+                    </div>
+                </form>
+            </div>
+        </header>
+        <section class="body">
+            <div class="inner_container">
+                <div class="toolbar">
+                    <a href=""  ng-click="categoryName('productGridView', product.id, product.name)">
+                        <img src="{{imageBasePath}}/images/staticImage/grid_view_icon.png" alt="">
+                    </a>
+                    <a href="" class="singleViewIcon" ng-click="categoryName('productSingleView', product.id, product.name)">
+                        <img src="{{imageBasePath}}/images/staticImage/single_view_icon.png" alt="">
+                    </a>
+                </div>
+                <div class="product_slider">
+                    <!--<div class="custom_order">-->
+                    <!--<a href="" ng-click="categoryName('customOrder')">Custom Order</a>-->
+                    <!--</div>-->
+                    <div id="demo">
+                        <uib-carousel interval="myInterval" active="activeSlide">
+                            <uib-slide ng-repeat="product in category_products | filter:$ctrl12.query" index="$index">
+                                <h3>{{product.name}}</h3>
+
+                                <img src="{{imageBasePath}}/images/usersImages/product/{{product.image}}" ng-if="product.image" style="margin:auto;">
+                                <img src="{{imageBasePath}}/images/usersImages/product/images.png" ng-if="!product.image" style="margin:auto;">
+
+                                <div class="carousel-caption">
+                                    <div class="btn1">
+                                        <a class="carousalHoverImage" href="" ng-click="categoryName('product', product.id, product.name)"  data-id="{{product.id}}">Order</a>
+                                    </div>
+                                </div>
+                            </uib-slide>
+                        </uib-carousel>
+                    </div>
+
+                </div>
+            </div>
+        </section><br>
+    </div>
+    <div class="outer">
+        <footer class="footer inner_footer"> <span>Cake software version 1.0.0</span> </footer>
+    </div>
+</div>
+<div class="product-section" ng-if="productPreviewFlag">
+    <div class="wrapper">
+        <header class="header">
+            <nav class="inner_nav">
+                <ul class="breadcrumb-contents">
+                    <li ng-repeat="breadcrumb in breadcrumbs">
+                        <span ng-if="$last">
+                            <p>{{breadcrumb.name}} </p>
+                        </span>
+                        <span ng-if="! $last || breadcrumb.separator != '»'">
+                            <a href="" ng-click="categoryName(breadcrumb.module, breadcrumb.id, breadcrumb.name)">{{breadcrumb.name}} </a> {{breadcrumb.separator}}
+                        </span>
+                    </li>
+                </ul>
+            </nav>
+            <div class="logo"> <a href=""><img src="{{imageBasePath}}/images/staticImage/logo.png" alt=""></a> </div>
+            <div class="search_container">
+                <form action="" method="get">
+                    <div class="search_block">
+                        <input name="" type="text" class="text_field" ng-model="$ctrl2.query" placeholder="Search products here ...">
+                        <input name="" type="button" class="btn">
+                    </div>
+                </form>
+            </div>
+        </header>
+        <section id="body1">
+            <div class="inner_container">
+                <div class="toolbar">
+                    <a href=""  ng-click="categoryName('productGridView', product.id, product.name)">
+                        <img src="{{imageBasePath}}/images/staticImage/grid_view_icon.png" alt="">
+                    </a>
+                    <a href="" class="singleViewIcon" ng-click="categoryName('productSingleView', product.id, product.name)">
+                        <img src="{{imageBasePath}}/images/staticImage/single_view_icon.png" alt="">
+                    </a>
+                </div>
+                <div class="grid_view">
+                    <ul>
+                        <li ng-repeat="product in category_products | filter:$ctrl2.query ">
+                            <a href="" ng-click="categoryName('product', product.id, product.name, $index)"  data-id="{{product.id}}">
+                                <div class="product">
+                                    <div class="product_thumbnail">
+                                        <img style="width: 220px; height: 250px;" src='{{imageBasePath}}/images/usersImages/product/{{product.image}}' ng-if="product.image" alt="">
+                                        <img style="width: 220px; height: 250px;" src="{{imageBasePath}}/images/usersImages/product/images.png" ng-if="!product.image" alt="">
+                                    </div>
+                                    <div class="product_detail">
+                                        <span>{{ product.name }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section><br>
+    </div>
+    <div class="outer">
+        <footer class="footer inner_footer"> <span>Cake software version 1.0.0</span> </footer>
+    </div>
+</div>
+<div class="inner_bg" ng-if="orderFlag">
+    <div class="wrapper">
+        <header class="header">
+            <nav class="inner_nav">
+                <ul class="breadcrumb-contents">
+                    <li ng-repeat="breadcrumb in breadcrumbs">
+                        <span ng-if="$last">
+                            <p>{{breadcrumb.name}} </p>
+                        </span>
+                        <span ng-if="! $last">
+                            <a href="" ng-click="categoryName(breadcrumb.module, breadcrumb.id, breadcrumb.name)">{{breadcrumb.name}} </a> {{breadcrumb.separator}}
+                        </span>
+                    </li>
+                </ul>
+            </nav>
+            <div class="logo"> <img src="{{imageBasePath}}/images/staticImage/logo1.png" alt=""> </div>
+        </header>
+        <section class="body">
+            <div class="inner_container">
+                <div class="place_order_container clearfix">
+                    <h3>Place Your Order</h3>
+                    <form  name="orderForm" novalidate>
+                        <div class="place_order_form">
+                            <div class="top_block clearfix">
+                                <div class="left_col">
+                                    <div class="cake_image">
+                                        <div class="title"> Cake Image </div>
+                                        <div class="thumbnail">
+                                            <img src="{{imageBasePath}}/images/usersImages/product/{{products.image}}" ng-if="products.image" alt="">
+                                            <img src="{{imageBasePath}}/images/usersImages/product/images.png" ng-if="!products.image" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="delivery_date">
+
+                                        <div class="title"> Delivery Date</div>
+                                        <div class="fields" ng-class="{ 'has-error': orderForm.delivery_date_time.$invalid && !orderForm.delivery_date_time.$pristine }">
+                                            <!--<input type="time" name="delivery_date_time" ng-model="order.delivery_date_time" placeholder="Time">-->
+
+                                            <input focus type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"  ng-click="open1()"/>
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                        <input type="hidden"  class="order_delivery_date" value="{{dt | date:'fullDate'}}">
+                                    </div>
+                                    <div class="delivery_time">
+
+                                        <div class="title"> Delivery Time</div>
+                                        <div class="fields" ng-class="{ 'has-error': orderForm.delivery_date_time.$invalid && !orderForm.delivery_date_time.$pristine }">
+                                            <div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+                                        </div>
+
+                                        <input type="hidden"  class="order_delivery_time" value="{{mytime | date:'shortTime'}}">
+                                    </div>
+                                    <div class="priority">
+                                        <div class="title"> Priority </div>
+                                        <div class="fields" ng-class="{ 'has-error': orderForm.priority.$invalid && !orderForm.priority.$pristine}">
+                                            <select focus ng-init="order.priority = priorities[1]" ng-model="order.priority" name="priority"
+                                                    ng-options="priority.value for priority in priorities" class="form-control priority" required>
+                                            </select>
+                                            <span class="error" ng-show="orderForm.priority.$error.required"> Not a valid priority!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right_col">
+                                    <div class="name">
+                                        <div class="title" > Name </div>
+                                        <div class="field" ng-class="{ 'has-error': orderForm.cust_name.$invalid && !orderForm.cust_name.$pristine}">
+                                            <input focus type="text" name="cust_name" class="cust_name" ng-model="order.cust_name" autocomplete="off" placeholder="Your name please" required>
+                                            <div ng-show="orderForm.$submitted || orderForm.cust_name.$touched" class="help-block cust_name_message">
+                                                <div ng-show="orderForm.cust_name.$error.required" style="color: #ff8e95; margin-left: 10px;">Your name please.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="name" ng-class="{ 'has-error': orderForm.cust_email.$invalid && !orderForm.cust_email.$pristine}">
+                                        <div class="title control-label"> Email </div>
+                                        <div class="field" >
+                                            <input focus type="email" name="cust_email" ng-model="order.cust_email" autofocus="true"
+                                                   placeholder="Your email address" autocomplete="off">
+                                            <span class="help-inline" ng-show="orderForm.cust_email.$error.email" style="color: #ff8e95; margin-left: 10px;"> Not valid email!</span>
+                                            <div ng-show="orderForm.$submitted || orderForm.cust_email.$touched" class="help-block cust_name_message">
+                                                <div ng-show="orderForm.cust_email.$error.required" style="color: #ff8e95; margin-left: 10px;">Not valid email!</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="name">
+                                        <div class="title"> Telephone </div>
+                                        <div class="field" ng-class="{ 'has-error': orderForm.cust_phone.$invalid && !orderForm.cust_phone.$pristine}">
+                                            <input focus type="number" name="cust_phone" ng-model="order.cust_phone"
+                                                   ng-minlength="11" ng-maxlength="11" placeholder="Your phone number" autocomplete="off">
+                                            <span class="help-block"
+                                                  ng-show="((orderForm.cust_phone.$error.minlength ||
+                                                           orderForm.cust_phone.$error.maxlength) &&
+                                                           orderForm.cust_phone.$dirty) ">Phone credentials not complete
+                                            </span>
+                                            <span class="help-block" ng-show="orderForm.cust_phone.$error.number">
+                                                           Valid phone number is required
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bottom_block">
+                                <div class="left_col">
+                                    <div class="ingredients">
+                                        <div class="title"> Flavour 1 </div>
+                                        <div class="field">
+                                            <select focus class="form-control" ng-model="order.flavor1">
+                                                <option value="">Select Flavor</option>
+                                                <option ng-repeat="flavour in flavours " value="{{flavour.id}}">{{flavour.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="ingredients">
+                                        <div class="title"> Flavour 2 </div>
+                                        <div class="field">
+                                            <select focus class="form-control"  ng-model="order.flavor2">
+                                                <option value="">Select Flavor</option>
+                                                <option ng-repeat="flavour in flavours " value="{{flavour.id}}">{{flavour.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="ingredients">
+                                        <div class="title"> Weight *</div>
+                                        <div class="field" ng-class="{ 'has-error': orderForm.weight.$invalid && !orderForm.weight.$pristine }">
+                                            <input focus type="number" class="weight" ng-value="products.weight" name="weight" ng-model="order.weight"
+                                                   ng-change="calculatePrice()" min="{{products.maxWeight}}" placeholder="Weight"
+                                                   autocomplete="off" required>
+
+                                            <p ng-show="orderForm.weight.$invalid && !orderForm.weight.$pristine" class="help-block">
+                                                Product weight is required and it can be up to {{products.weight-1}}.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="ingredients">
+                                        <div class="title"> Quantity *</div>
+                                        <div class="field" ng-class="{ 'has-error': orderForm.quantity.$invalid && !orderForm.quantity.$pristine}">
+                                            <input focus type="number" class="quantity" name="quantity" ng-model="quantity"
+                                                   ng-change="calculatePrice()" min="1"  placeholder="Quantity"
+                                                   autocomplete="off" required>
+
+                                            <div ng-show="orderForm.$submitted || orderForm.quantity.$touched" class="help-block weight_message">
+                                                <div ng-show="orderForm.quantity.$error.required" style="color: #ff8e95; margin-left: 10px;">
+                                                    Product quantity is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="right_col">
+                                    <div class="ingredients">
+                                        <div class="title"> Total (Rs) *</div>
+                                        <div class="field" ng-class="{ 'has-error': orderForm.price.$invalid && !orderForm.price.$pristine }">
+                                            <input type="number" ng-value="products.price" ng-model="order.price"
+                                                   class="price" name="price" disabled>
+                                        </div>
+                                        <input type="hidden"  class="product_price" value="{{products.price}}">
+                                    </div>
+
+                                    <div class="ingredients">
+                                        <div class="title"> Advance (Rs) </div>
+                                        <div class="field" ng-class="{ 'has-error': orderForm.advance_price.$invalid && !orderForm.advance_price.$pristine}">
+                                            <input focus type="number" name="advance_price" class="advance_price"
+                                                   ng-model="order.advance_price"
+                                                   ng-change="calculatePrice()" placeholder="Advance" max="{{products.price}}"
+                                                   autocomplete="off" min="0">
+
+                                            <input type="hidden"  class="advance_hidden_price">
+                                            <div ng-show="orderForm.$submitted || orderForm.advance_price.$touched" class="help-block">
+                                                <div ng-show="orderForm.advance_price.$error.maxlength" style="color: #ff8e95; margin-left: 10px;">Advance could not be greater.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="ingredients">
+                                        <div class="title"> Balance (Rs) </div>
+                                        <div class="field">
+                                            <input name="total_blance" ng-value="total_price" class="total_blance" ng-model="order.total_blance" type="text" disabled>
+                                        </div>
+                                        <input type="hidden"  class="total_price" value="{{total_price}}">
+                                    </div>
+                                </div>
+                                <div class="remarks">
+                                    <div class="title"> Remarks </div>
+                                    <div class="text_area" ng-class="{ 'has-error': orderForm.remarks.$invalid && !orderForm.remarks.$pristine }">
+                                        <textarea focus name="" cols="" rows="5" name="remarks" ng-model="order.remarks" placeholder="Your remarks" autocomplete="off"></textarea>
+                                    </div>
+                                </div>
+
+                                <input type="hidden"  class="product_id1" value="{{products.id}}">
+                                <input type="hidden"  class="normalForm" value="normalForm">
+
+                                <div class="buttons">
+                                    <!--<input type="button" class="btn1" value="Cancel"  ng-click="categoryName('orderForm')" >-->
+                                    <!--<input type="button" class="btn2" value="Order Now" ng-disabled="orderForm.$invalid" ng-click="categoryName('submitOrderForm', order)">-->
+
+                                    <input focus type="button" class="btn btn1" value="Cancel " ng-click="categoryName('submitOrderFormCencel')" >
+                                    <input focus type="submit" class="btn btn2" ng-click="categoryName('submitOrderForm', order);submitted=true" value="Order Now ">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <div class="clearfix"></div>
+        <div class="outer">
+            <footer class="footer inner_footer"> <span>Cake software version 1.0.0</span> </footer>
+        </div>
+    </div>
+</div>
+<div class="inner_bg" ng-if="customOrderFlag">
+    <div class="wrapper">
+        <header class="header">
+            <nav class="inner_nav">
+                <ul class="breadcrumb-contents">
+                    <li ng-repeat="breadcrumb in breadcrumbs">
+                        <span ng-if="$last">
+                            <p>{{breadcrumb.name}} </p>
+                        </span>
+                        <span ng-if="! $last">
+                            <a href="" ng-click="categoryName(breadcrumb.module, breadcrumb.id, breadcrumb.name)">{{breadcrumb.name}} </a> {{breadcrumb.separator}}
+                        </span>
+                    </li>
+                </ul>
+            </nav>
+            <div class="logo"><img src="{{imageBasePath}}/images/staticImage/logo1.png" alt=""> </div>
+        </header>
+        <section class="body">
+            <div class="inner_container">
+                <div class="place_order_container clearfix">
+                    <h3>Place Your Order</h3>
+                    <form  name="orderForm" novalidate>
+                        <div class="place_order_form">
+                            <div class="top_block clearfix">
+                                <div class="left_col">
+
+                                    <div class="product-name" >
+                                        <div class="title"> Product Name </div>
+                                        <div class="fields" ng-class="{ 'has-error': orderForm.product_name.$invalid && !orderForm.product_name.$pristine}">
+                                            <input focus type="text" name="product_name" class="product_name" ng-model="order.product_name" autofocus="true" autocomplete="off" placeholder="Product name" required>
+                                            <div ng-show="orderForm.$submitted || orderForm.product_name.$touched" class="help-inline product_name_message">
+                                                <div ng-show="orderForm.product_name.$error.required" style="color: #ff8e95;">Product name please.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="delivery_date_custom">
+
+                                        <div class="title"> Delivery Date</div>
+                                        <div class="fields" ng-class="{ 'has-error': orderForm.delivery_date_time.$invalid && !orderForm.delivery_date_time.$pristine }">
+                                            <!--<input type="time" name="delivery_date_time" ng-model="order.delivery_date_time" placeholder="Time">-->
+
+                                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt"  autofocus="true" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"  ng-click="open1()"/>
+                                            <span class="input-group-btn">
+                                                <button tabindex="-1" type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                        <input type="hidden"  class="order_delivery_date" value="{{dt | date:'fullDate'}}">
+                                    </div>
+                                    <div class="delivery_time">
+
+                                        <div class="title"> Delivery Time</div>
+                                        <div class="fields" ng-class="{ 'has-error': orderForm.mytime.$invalid && !orderForm.mytime.$pristine }">
+                                            <div uib-timepicker ng-model="mytime" ng-change="changed()"
+                                                 hour-step="hstep" min="minTime" minute-step="mstep" show-meridian="ismeridian">
+                                            </div>
+                                            <div class="time_error_message" style="color: #ff8e95; margin-left: 10px;" hidden>Invalid date.</div>
+                                        </div>
+                                        <input type="hidden"  class="order_delivery_time" value="{{mytime | date:'shortTime'}}">
+                                    </div>
+
+                                    <div class="priority">
+                                        <div class="title"> Priority </div>
+                                        <div class="fields" ng-class="{ 'has-error': orderForm.priority.$invalid && !orderForm.priority.$pristine}">
+                                            <select focus ng-init="order.priority = priorities[1]" ng-model="order.priority" autofocus="true" name="priority"
+                                                    ng-options="priority.value for priority in priorities" class="form-control priority" required>
+                                            </select>
+                                            <span class="error" ng-show="orderForm.priority.$error.required"> Not a valid priority!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right_col">
+                                    <div class="name">
+                                        <div class="title" > Name </div>
+                                        <div class="field" ng-class="{ 'has-error': orderForm.cust_name.$invalid && !orderForm.cust_name.$pristine}">
+                                            <input focus type="text" name="cust_name" class="cust_name" ng-model="order.cust_name" autocomplete="off"
+                                                   placeholder="Your name please" required>
+                                            <div ng-show="orderForm.$submitted || orderForm.cust_name.$touched" class="help-block cust_name_message">
+                                                <div ng-show="orderForm.cust_name.$error.required" style="color: #ff8e95; margin-left: 10px;">Your name please.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="name" ng-class="{ 'has-error': orderForm.cust_email.$invalid && !orderForm.cust_email.$pristine}">
+                                        <div class="title control-label"> Email </div>
+                                        <div class="field" >
+                                            <input focus type="email" name="cust_email" ng-model="order.cust_email" autofocus="true"
+                                                   placeholder="Your email address" autocomplete="off">
+                                            <span class="help-inline" ng-show="orderForm.cust_email.$error.email" style="color: #ff8e95; margin-left: 10px;"> Not valid email!</span>
+                                            <div ng-show="orderForm.$submitted || orderForm.cust_email.$touched" class="help-block cust_name_message">
+                                                <div ng-show="orderForm.cust_email.$error.required" style="color: #ff8e95; margin-left: 10px;">Not valid email!</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="name">
+                                        <div class="title"> Telephone </div>
+                                        <div class="field" ng-class="{ 'has-error': orderForm.cust_phone.$invalid && !orderForm.cust_phone.$pristine}">
+                                            <input focus type="number" name="cust_phone" ng-model="order.cust_phone" autofocus="true"
+                                                   ng-minlength="11" ng-maxlength="11" placeholder="Your phone number" autocomplete="off">
+                                            <span class="help-block" ng-show="((orderForm.cust_phone.$error.minlength ||
+                                                           orderForm.cust_phone.$error.maxlength) &&
+                                                           orderForm.cust_phone.$dirty) "style="color: #ff8e95; margin-left: 10px;">Phone credentials are invalid.
+                                            </span>
+                                            <span class="help-block" ng-show="orderForm.cust_phone.$error.number">
+                                                           Valid phone number is required
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bottom_block">
+                                <div class="left_col">
+                                    <div class="ingredients">
+                                        <div class="title"> Flavour 1 </div>
+                                        <div class="field">
+                                            <select focus class="form-control flavor1" ng-model="order.flavor1" autofocus="true">
+                                                <option value="">Select Flavor</option>
+                                                <option ng-repeat="flavour in flavours " value="{{flavour.id}}">{{flavour.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="ingredients">
+                                        <div class="title"> Flavour 2 </div>
+                                        <div class="field">
+                                            <select focus class="form-control flavor2"  ng-model="order.flavor2" autofocus="true">
+                                                <option value="">Select Flavor</option>
+                                                <option ng-repeat="flavour in flavours " value="{{flavour.id}}">{{flavour.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="ingredients">
+                                        <div class="title"> Weight *</div>
+                                        <div class="field" ng-class="{ 'has-error': orderForm.weight.$invalid && !orderForm.weight.$pristine}">
+                                            <input focus type="number" class="weight" step="1" name="weight"
+                                                   ng-model="order.weight" autofocus="true" placeholder="Weight"
+                                                   ng-change="calculatePriceCustomOrder()" min="1" autocomplete="off" required>
+                                            <div ng-show="orderForm.$submitted || orderForm.weight.$touched" class="help-block weight_message">
+                                                <div ng-show="orderForm.weight.$error.required" style="color: #ff8e95; margin-left: 10px;">
+                                                    Product weight is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ingredients">
+                                        <div class="title"> Quantity *</div>
+                                        <div class="field" ng-class="{ 'has-error': orderForm.quantity.$invalid && !orderForm.quantity.$pristine}">
+                                            <input focus type="number" class="quantity" step="1" name="quantity"
+                                                   ng-model="order.quantity" autofocus="true" placeholder="Quantity"
+                                                   ng-change="calculatePriceCustomOrder()" min="1" autocomplete="off" ng-init="1" required>
+                                            <div ng-show="orderForm.$submitted || orderForm.quantity.$touched" class="help-block">
+                                                <div ng-show="orderForm.quantity.$error.required" style="color: #ff8e95; margin-left: 10px;">
+                                                    Product quantity is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="right_col">
+                                    <div class="ingredients">
+                                        <div class="title"> Total (Rs) *</div>
+                                        <div class="field" ng-class="{ 'has-error': orderForm.price.$invalid && !orderForm.price.$pristine }">
+                                            <input focus type="number" ng-value="products.price" ng-model="order.price"
+                                                   id="custom-price" class="price"
+                                                   name="price" min="0">
+                                        </div>
+                                        <input type="hidden"  class="product_price" value="{{products.price}}">
+                                        <input type="hidden"  class="product_hidden_price" value="1">
+
+                                    </div>
+
+                                    <div class="ingredients">
+                                        <div class="title"> Advance (Rs) </div>
+                                        <div class="field" >
+                                            <input focus type="number" name="advance_price"
+                                                   ng-change="calculatePriceCustomOrder()" class="advance_price" ng-model="order.advance_price"
+                                                   placeholder="Advance" autocomplete="off"  min="0">
+                                        </div>
+                                        <input type="hidden"  class="advance_hidden_price" value="">
+
+                                    </div>
+                                    <div class="ingredients">
+                                        <div class="title"> Balance (Rs) </div>
+                                        <div class="field">
+                                            <input name="total_blance" ng-value="total_price" class="total_blance" ng-model="order.total_blance"
+                                                   type="text" min="0" disabled>
+                                        </div>
+                                        <input type="hidden"  class="total_price" value="{{total_price}}">
+                                    </div>
+                                </div>
+                                <div class="remarks">
+                                    <div class="title"> Remarks </div>
+                                    <div class="text_area" ng-class="{ 'has-error': orderForm.remarks.$invalid && !orderForm.remarks.$pristine }">
+                                        <textarea focus ng-minlength="0" ng-maxlength="50" cols="" rows="5" name="remarks"
+                                                  ng-model="order.remarks" placeholder="Your remarks" autocomplete="off">
+                                        </textarea>
+                                        <div ng-show="orderForm.$submitted || orderForm.remarks.$touched" class="help-block">
+                                            <div ng-show="orderForm.remarks.$error.maxlength" style="color: #ff8e95; margin-left: 10px;">
+                                                Remarks length increase.
+                                            </div>
+                                            <div ng-show="orderForm.remarks.$error.minlength"style="color: #ff8e95; margin-left: 10px;">
+                                                Remarks length decrease.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="select_file">
+                                    <div class="title"> Select Photo </div>
+                                    <div class="shoose_file" ng-class="{ 'has-error': orderForm.remarks.$invalid && !orderForm.remarks.$pristine }">
+                                        <input focus type="file" id="uploadFile" ng-model="order.uploadFile" />
+                                    </div>
+                                </div>
+
+                                <!--<input type="hidden"  class="product_id1" value="{{products.id}}">-->
+
+                                <!--<input type="file" onchange="angular.element(this).scope().fileNameChanged()" />-->
+
+                                <div class="buttons">
+
+                                    <input focus type="button" class="btn btn1" value="Cancel " ng-click="categoryName('submitCustomOrderFormCencel')" >
+                                    <input focus type="submit" class="btn btn2"  ng-disabled="orderForm.$invalid" ng-click="categoryName('submitCustomOrderForm', order);submitted=true" value="Order Now ">
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <div class="clearfix"></div>
+        <div class="outer">
+            <footer class="footer inner_footer"> <span>Cake software version 1.0.0</span> </footer>
+        </div>
+    </div>
+</div>
+<div class="product-section" ng-if="thanxPageFlag">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Thank You So Much !
+                    <small> for placing order</small>
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <img src='{{imageBasePath}}/images/usersImages/product/{{order.image}}' ng-if="order.image" style="width: 200px; height: 200px;" alt="">
+                <span style="margin: 40px;" ng-if="!order.image" >No image </span>
+            </div>
+
+            <div class="col-md-6">
+                <h3>Customer Name: {{ order.cust_name }}</h3>
+                <p>Product Price: {{ order.price }}</p>
+                <p>Advance Price: {{ order.advance_price }}</p>
+            </div>
+
+        </div>
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Cake software version 1.0.0</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+    </div>
+</div>
